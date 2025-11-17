@@ -43,3 +43,30 @@ GROUP BY
     p.category
 ORDER BY
     revenue DESC;
+
+-- TASK 3: Employees Earning Above Their Department Average
+WITH DepartmentAverages AS (
+    SELECT
+        department_id,
+        AVG(salary) AS dept_average_salary
+    FROM
+        employees
+    GROUP BY
+        department_id
+)
+SELECT
+    e.first_name,
+    e.last_name,
+    d.name AS department_name,
+    e.salary AS employee_salary,
+    da.dept_average_salary AS department_average
+FROM
+    employees AS e
+JOIN
+    departments AS d ON e.department_id = d.id
+JOIN
+    DepartmentAverages AS da ON e.department_id = da.department_id
+WHERE
+    e.salary > da.dept_average_salary
+ORDER BY
+    department_name, employee_salary DESC;

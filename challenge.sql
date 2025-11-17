@@ -1,3 +1,9 @@
+-- SQL Coding Challenge Submission
+-- Tool Used: VS Code + SQLTools (SQLite driver)
+-- Validation: Each query was run individually against the bais_sqlite_lab.db
+-- to confirm the logic and results.
+
+
 -- TASK 1: Top 5 Customers by Total Spend
 SELECT
     c.first_name || ' ' || c.last_name AS customer_full_name,

@@ -70,3 +70,30 @@ WHERE
     e.salary > da.dept_average_salary
 ORDER BY
     department_name, employee_salary DESC;
+
+-- TASK 4: Cities with the Most Loyal Customers
+SELECT
+    city,
+    COUNT(id) AS gold_customer_count
+FROM
+    customers
+WHERE
+    loyalty_level = 'Gold'
+GROUP BY
+    city
+ORDER BY
+    gold_customer_count DESC, city;
+
+-- TASK 4 (Extension): Loyalty Distribution by City
+SELECT
+    city,
+    COUNT(CASE WHEN loyalty_level = 'Gold' THEN 1 ELSE NULL END) AS gold_count,
+    COUNT(CASE WHEN loyalty_level = 'Silver' THEN 1 ELSE NULL END) AS silver_count,
+    COUNT(CASE WHEN loyalty_level = 'Bronze' THEN 1 ELSE NULL END) AS bronze_count,
+    COUNT(id) AS total_customers
+FROM
+    customers
+GROUP BY
+    city
+ORDER BY
+    gold_count DESC, total_customers DESC, city;
